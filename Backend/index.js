@@ -16,8 +16,6 @@ const { notificationRouter } = require("./routes/notification.route.js");
 
 const { ooprouter } = require("./routes/opportunities.route.js");
 
-
-
 /////////////////////
 
 //*--ROUTES--(path)//endpoints
@@ -25,18 +23,13 @@ app.use("/users", userRouter);
 app.use("/opportunities", ooprouter);
 app.use("/notifications", notificationRouter);
 
+const dns = require("dns");
 
-
-
-
-
-
-
-
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 //*--CONNECT DB--
 connectDB();
 
 app.listen(PORT, () => {
   //logic
   console.log(`my app listening on port 5000 successfully`);
-})
+});
