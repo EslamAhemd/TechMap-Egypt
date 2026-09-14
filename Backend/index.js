@@ -11,7 +11,8 @@ app.use(express.json()); //middleware
 app.use(myMiddleware);
 /////////////////////
 const { userRouter } = require("./routes/user.route.js");
-// const { notificationRouter } = require("./routes/notification.route.js");
+const { notificationRouter } = require("./routes/notification.route.js");
+
 
 const { ooprouter } = require("./routes/opportunities.route.js");
 
@@ -22,7 +23,7 @@ const { ooprouter } = require("./routes/opportunities.route.js");
 //*--ROUTES--(path)//endpoints
 app.use("/users", userRouter);
 app.use("/opportunities", ooprouter);
-// app.use("/notification", notificationRouter);
+app.use("/notifications", notificationRouter);
 
 
 
