@@ -1,0 +1,136 @@
+.hero-section {
+  position: relative;
+  background-color: #0c1c38;
+  /* إضافة شبكة الخطوط المتقاطعة الفاتحة كخلفية */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: #ffffff;
+  padding: 80px 20px 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Badge Header */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  color: #93c5fd;
+  margin-bottom: 28px;
+}
+
+.pin-icon {
+  color: #3b82f6;
+}
+
+/* Title & Highlight */
+.hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+
+.hero-title .highlight {
+  color: #60a5fa;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: 17px;
+  color: #94a3b8;
+  max-width: 720px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* Search Bar Wrapper */
+.search-box-wrapper {
+  width: 100%;
+  max-width: 680px;
+  margin-bottom: 50px;
+}
+
+.search-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 6px 6px 6px 18px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.search-icon {
+  color: #94a3b8;
+  margin-right: 12px;
+}
+
+.search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #1e293b;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.search-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.popular-tags {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 14px;
+}
+
+/* Stats Section */
+.stats-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 34px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #94a3b8;
+}

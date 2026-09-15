@@ -1,0 +1,107 @@
+/* Base Container */
+.footer-wrapper {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #ffffff;
+  width: 100%;
+}
+
+/* Upper CTA Section */
+.cta-section {
+  background-color: #1a2d48; /* Dark navy background */
+  text-align: center;
+  padding: 90px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.cta-subtitle {
+  font-size: 17px;
+  color: #94a3b8;
+  max-width: 650px;
+  line-height: 1.5;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+
+/* Buttons Container */
+.cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Blue Primary Button */
+.btn-blue {
+  text-decoration: none;
+  background-color: #2563eb;
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-blue:hover {
+  background-color: #1d4ed8;
+}
+
+/* Dark Outline Button */
+.btn-outline {
+  text-decoration: none;
+  background-color: rgba(15, 23, 42, 0.4);
+  color: #ffffff;
+  border: 1px solid #334155;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #475569;
+}
+
+/* Bottom Dark Copyright Bar */
+.bottom-bar {
+  background-color: #0b1322; /* Deeper dark background */
+  padding: 30px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.copyright {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #94a3b8;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
