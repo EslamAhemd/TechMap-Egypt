@@ -16,12 +16,18 @@ const { notificationRouter } = require("./routes/notification.route.js");
 
 const { ooprouter } = require("./routes/opportunities.route.js");
 
+const { reviewRouter } = require("./routes/reviews.route.js");
+const { reportRouter } = require("./routes/reports.route.js");
+
+
 /////////////////////
 
 //*--ROUTES--(path)//endpoints
 app.use("/users", userRouter);
 app.use("/opportunities", ooprouter);
 app.use("/notifications", notificationRouter);
+app.use("/reviews", reviewRouter);
+app.use("/reports", reportRouter);
 
 const dns = require("dns");
 
