@@ -1,0 +1,35 @@
+h2 {
+  margin-bottom: 20px;
+}
+
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.review-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  background: white;
+}
+
+.review-header h3 {
+  margin: 0 0 5px;
+}
+
+.review-header span {
+  color: #666;
+}
+
+.review-text {
+  margin: 20px 0;
+}
+
+.ratings {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #555;
+}

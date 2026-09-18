@@ -1,7 +1,6 @@
 import { Profile } from './components/profile/profile';
 import { authGuard } from './guards/auth-guard';
 import { Routes } from '@angular/router';
-
 import { Home } from './pages/home/home';
 import { Login } from './components/login/login';
 import { Register } from './components/register/register';

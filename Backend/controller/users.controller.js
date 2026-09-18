@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { printData } = require("../services/users.service.js");  // done
 const { userModel } = require("../models/users.model.js");  /// make the schema
-const { JWT_SECRET } = require("../config/env.config.js");
+
 
 
 
@@ -30,7 +30,7 @@ const getUsers = (req, res) => {
 
 // POST
 const addUsers = (req, res) => {
-  console.log("body", req.body);
+  console.log("body", req.body); 
 
   userModel
     .create(req.body)
@@ -92,95 +92,18 @@ const deleteUsers = (req, res) => {
 
 
 async function hashAllPasswords() {
-  const users = await User.find({});
-
-  for (let user of users) {
-    // التأكد إن كلمة السر مش معمول لها هاش بالفعل (مثلاً التشييك على طول الهاش)
-    if (!user.password.startsWith('$2b$') && !user.password.startsWith('$2a$')) {
-      const hashedPassword = await bcrypt.hash(user.password, 10);
-      user.password = hashedPassword;
-      await user.save();
+    const users = await User.find({});
+    
+    for (let user of users) {
+        // التأكد إن كلمة السر مش معمول لها هاش بالفعل (مثلاً التشييك على طول الهاش)
+        if (!user.password.startsWith('$2b$') && !user.password.startsWith('$2a$')) {
+            const hashedPassword = await bcrypt.hash(user.password, 10);
+            user.password = hashedPassword;
+            await user.save();
+        }
     }
-  }
-  console.log("Completed hashing all passwords.");
+    console.log("Completed hashing all passwords.");
 }
-
-
-/// =====================REGISTER=========================
-
-const register = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-
-    if (!name || !email || !password) {
-      return res.status(400).json({
-        message: "Name, email and password are required",
-      });
-    }
-
-    if (password.length < 8) {
-      return res.status(400).json({
-        message: "Password must contain at least 8 characters",
-      });
-    }
-
-    const normalizedEmail = email.trim().toLowerCase();
-
-    const existingUser = await userModel.findOne({
-      email: normalizedEmail,
-    });
-
-    if (existingUser) {
-      return res.status(409).json({
-        message: "An account with this email already exists",
-      });
-    }
-
-    const user = await userModel.create({
-      name: name.trim(),
-      email: normalizedEmail,
-      password,
-      role: "JobSeeker",
-    });
-
-    return res.status(201).json({
-      message: "Account created successfully",
-      data: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
-    });
-  } catch (err) {
-    console.error("Register error:", err);
-
-    if (err.code === 11000) {
-      return res.status(409).json({
-        message: "An account with this email already exists",
-      });
-    }
-
-    return res.status(500).json({
-      message: "An error occurred while creating the account",
-    });
-  }
-};
-
-
-
-
-
-
-
-
-
-
-
-///==============LOGIN=================
-
-
-
 const login = (req, res) => {
   const { email, password } = req.body;
 
@@ -244,12 +167,4 @@ const login = (req, res) => {
 };
 
 
-// module.exports = { getUsers, addUsers, updateUsers, deleteUsers, login };
-module.exports = {
-  getUsers,
-  addUsers,
-  updateUsers,
-  deleteUsers,
-  register,
-  login,
-};
+module.exports = { getUsers, addUsers, updateUsers, deleteUsers, login };

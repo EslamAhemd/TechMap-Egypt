@@ -1,15 +1,13 @@
 const express = require("express");
+const cors = require("cors");
 const { myMiddleware } = require("./middlewares/looged.middleware.js");
 const { connectDB } = require("./config/db.config.js");
 const { PORT } = require("./config/env.config.js");
-const cors = require("cors");
+
 
 const app = express();
-app.use(
-  cors({
-    origin: "http://localhost:4200",
-  })
-);
+app.use(cors());
+
 
 app.use(express.json()); //middleware
 app.use(myMiddleware);
@@ -22,7 +20,8 @@ const { ooprouter } = require("./routes/opportunities.route.js");
 
 const { reviewRouter } = require("./routes/reviews.route.js");
 const { reportRouter } = require("./routes/reports.route.js");
-
+const { companyRouter } = require("./routes/companies.route.js");
+const { skillRouter } = require("./routes/skills.route.js");
 
 /////////////////////
 
@@ -32,12 +31,13 @@ app.use("/opportunities", ooprouter);
 app.use("/notifications", notificationRouter);
 app.use("/reviews", reviewRouter);
 app.use("/reports", reportRouter);
-
+app.use("/companies", companyRouter);
+app.use("/skills", skillRouter);
 const dns = require("dns");
 
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 //*--CONNECT DB--
-connectDB();
+ connectDB();
 
 app.listen(PORT, () => {
   //logic
