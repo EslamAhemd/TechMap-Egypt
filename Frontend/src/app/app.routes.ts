@@ -5,19 +5,16 @@ import { Home } from './pages/home/home';
 import { Login } from './components/login/login';
 import { Register } from './components/register/register';
 
-import {
-  AdminUsers
-} from './components/admin-users/admin-users';
-
-import {
-  adminGuard
-} from './guards/admin-guard';
-
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
     component: Home,
-    title: 'TechMap Egypt'
+    title: 'Home | TechMap Egypt'
   },
   {
     path: 'login',
@@ -30,20 +27,8 @@ export const routes: Routes = [
     title: 'Register | TechMap Egypt'
   },
   {
-    path: 'profile',
-    component: Profile,
-    canActivate: [authGuard],
-    title: 'Profile | TechMap Egypt'
-  },
-  {
-    path: 'admin/users',
-    component: AdminUsers,
-    canActivate: [adminGuard],
-    title: 'Users Admin | TechMap Egypt'
-  }
-  ,
-  {
     path: '**',
-    redirectTo: ''
+    component: NotFound,
+    title: 'Page Not Found | TechMap Egypt'
   }
 ];

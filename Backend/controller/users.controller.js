@@ -229,4 +229,5 @@ const register = (req, res) => {
     });
 };
 
-module.exports = { getUsers, addUsers, updateUsers, deleteUsers, login, register };
+
+module.exports = { getUsers, addUsers, updateUsers, deleteUsers, login };

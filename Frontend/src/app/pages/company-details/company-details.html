@@ -1,0 +1,53 @@
+<main class="company-details-page">
+  @if (company) {
+  <a routerLink="/companies" class="back-link">← Back to companies</a>
+
+  <section class="company-hero">
+    <img [src]="company.bannerImage" [alt]="company.name + ' office'" />
+    <div class="hero-content">
+      <div class="company-logo" [class.dark]="company.logoTheme === 'dark'" [class.blue]="company.logoTheme === 'blue'">
+        @if (company.logo.startsWith('http')) {
+        <img [src]="company.logo" [alt]="company.name + ' logo'" />
+        } @else {
+        <span>{{ company.logo }}</span>
+        }
+      </div>
+      <div>
+        <h1>{{ company.name }}</h1>
+        <p>{{ company.category }} · 📍 {{ company.location }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="company-content">
+    <div>
+      <h2>About {{ company.name }}</h2>
+      <p>{{ company.name }} is one of Egypt's leading technology employers, building products and solutions for people and businesses.</p>
+    </div>
+    <aside>
+      <strong>{{ company.employees }}</strong>
+      <span>{{ opportunities.length }} open opportunities</span>
+    </aside>
+  </section>
+
+  <section class="opportunities-section">
+    <h2>Open Opportunities</h2>
+    <div class="opportunity-list">
+      @for (opportunity of opportunities; track opportunity.id) {
+      <article class="opportunity-row">
+        <div>
+          <h3>{{ opportunity.title }}</h3>
+          <p>{{ opportunity.location }} · {{ opportunity.type }} · {{ opportunity.workMode }}</p>
+        </div>
+        <button type="button" class="apply-link" (click)="applyForOpportunity(opportunity.title)">Apply Now</button>
+      </article>
+      }
+    </div>
+  </section>
+  } @else {
+  <section class="missing-company">
+    <h1>Company not found</h1>
+    <a routerLink="/companies" class="apply-link">Back to companies</a>
+  </section>
+  }
+</main>

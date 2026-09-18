@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const saltRounds = 16; // عدد جولات التشفير لكلمة المرور
+const saltRounds = 12;
 
 
 

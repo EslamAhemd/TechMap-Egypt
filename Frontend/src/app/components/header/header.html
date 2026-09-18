@@ -1,6 +1,6 @@
 <header class="navbar">
   <!-- Brand Logo -->
-  <a href="#" class="logo">
+  <a routerLink="/home" class="logo">
     <img src="logo.png" alt="TechMap Logo" class="logo-img" />
     <div class="logo-text">
       <span class="brand-name">TechMap</span>
@@ -10,14 +10,22 @@
 
   <!-- Navigation Center -->
   <nav class="nav-links">
-    <a href="#" class="nav-link active">Home</a>
-    <a href="#" class="nav-link">Opportunities</a>
-    <a href="#" class="nav-link">Companies</a>
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Home</a>
+    <a routerLink="/opportunities" routerLinkActive="active" class="nav-link">Opportunities</a>
+    <a routerLink="/companies" routerLinkActive="active" class="nav-link">Companies</a>
+    @if (authService.isAdmin()) {
+    <a routerLink="/opportunities" class="admin-nav-link">♢ Admin</a>
+    }
   </nav>
 
   <!-- Auth Right Buttons -->
   <div class="auth-buttons">
+    @if (authService.isLoggedIn()) {
+    <span class="admin-user-badge"><span class="avatar">A</span> {{ authService.isAdmin() ? 'Admin' : 'Account' }} @if (authService.isAdmin()) {<strong>Admin</strong>}</span>
+    <button type="button" class="login-btn logout-btn" (click)="logout()">Logout</button>
+    } @else {
     <a routerLink="/login" class="login-btn">Login</a>
     <a routerLink="/register" class="register-btn">Register</a>
+    }
   </div>
 </header>

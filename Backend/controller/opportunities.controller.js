@@ -14,7 +14,9 @@ const createJob = (req, res) => {
 };
 
 const getAllJobs = (req, res) => {
-  Opportunities.find()
+  Opportunities.find({ status: 'Open' })
+    .populate({ path: 'requiredSkills', model: 'skills', select: 'name skillName' })
+    .populate({ path: 'preferredSkills', model: 'skills', select: 'name skillName' })
     .then((data) => {
       console.log("data", data);
       res.json({ message: "jobs fetched successfully", data: data });

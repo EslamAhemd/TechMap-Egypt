@@ -1,0 +1,46 @@
+.companies-page {
+  min-height: calc(100vh - 80px);
+  padding: 52px max(32px, calc((100vw - 1520px) / 2));
+  background: #f8fafc;
+}
+
+.page-heading {
+  margin-bottom: 10px;
+}
+
+.page-heading h1 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.page-heading p {
+  margin: 0;
+  color: #52709a;
+  font-size: 17px;
+}
+
+.companies-page ::ng-deep .section-container {
+  padding: 18px 0 0;
+  background: transparent;
+}
+
+.companies-page ::ng-deep .companies-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .companies-page {
+    padding: 28px 16px;
+  }
+
+  .page-heading h1 {
+    font-size: 30px;
+  }
+
+  .companies-page ::ng-deep .companies-grid {
+    grid-template-columns: 1fr;
+  }
+}

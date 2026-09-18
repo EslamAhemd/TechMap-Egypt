@@ -1,130 +1,55 @@
 <section class="section-container">
+  @if (!fullPage()) {
   <div class="section-header">
     <div>
       <h2 class="section-title">Top Tech Companies in Egypt</h2>
       <p class="section-subtitle">Explore Egypt's leading technology employers</p>
     </div>
-    <a href="#" class="view-all-btn">
-      View All 
+    <a routerLink="/companies" class="view-all-btn">
+      View All
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
     </a>
   </div>
+  }
 
+  @if (isLoading) {
+  <p class="company-state">Loading companies...</p>
+  } @else if (hasError) {
+  <p class="company-state error">Unable to load companies right now.</p>
+  } @else {
   <div class="companies-grid">
-    <!-- Company Card 1 -->
-    <div class="company-card">
+    @for (company of companies; track company.id) {
+    <article class="company-card">
       <div class="card-banner">
-        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&q=80" alt="Cover" />
+        <img [src]="company.bannerImage" [alt]="company.name + ' office'" />
       </div>
       <div class="card-body">
         <div class="logo-wrapper">
-          <div class="logo-box bg-dark">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028z"/></svg>
+          <div class="logo-box" [class.bg-dark]="company.logoTheme === 'dark'" [class.bg-light]="company.logoTheme === 'light'" [class.bg-blue]="company.logoTheme === 'blue'">
+            @if (company.logo.startsWith('http')) {
+            <img [src]="company.logo" [alt]="company.name + ' logo'" class="logo-img" />
+            } @else {
+            <span>{{ company.logo }}</span>
+            }
           </div>
         </div>
-        <h3 class="comp-name">Paymob</h3>
-        <p class="comp-cate">FinTech</p>
-        <p class="comp-loc">📍 Cairo, Egypt</p>
+        <h3 class="comp-name">{{ company.name }}</h3>
+        <p class="comp-cate">{{ company.category }}</p>
+        <p class="comp-loc">📍 {{ company.location }}</p>
 
         <div class="tags-row">
-          <span class="tag">Node.js</span>
-          <span class="tag">React</span>
-          <span class="tag">Python</span>
-          <span class="tag">PostgreSQL</span>
-          <span class="tag tag-more">+2</span>
+          @for (skill of company.skills; track skill) {
+          <span class="tag">{{ skill }}</span>
+          }
         </div>
 
         <div class="card-footer">
-          <span class="emp-count">200–500 employees</span>
-          <span class="badge-open">2 open roles</span>
+          <span class="emp-count">{{ company.employees }}</span>
+          <span class="badge-open">{{ openRoles(company.name) }} open roles</span>
         </div>
       </div>
-    </div>
-
-    <!-- Company Card 2 -->
-    <div class="company-card">
-      <div class="card-banner">
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80" alt="Cover" />
-      </div>
-      <div class="card-body">
-        <div class="logo-wrapper">
-          <div class="logo-box bg-light">
-            <img src="https://via.placeholder.com/40" alt="Logo" class="logo-img" />
-          </div>
-        </div>
-        <h3 class="comp-name">Fawry</h3>
-        <p class="comp-cate">FinTech / Payments</p>
-        <p class="comp-loc">📍 Giza, Egypt</p>
-
-        <div class="tags-row">
-          <span class="tag">Java</span>
-          <span class="tag">Spring Boot</span>
-          <span class="tag">React</span>
-          <span class="tag">Oracle DB</span>
-          <span class="tag tag-more">+2</span>
-        </div>
-
-        <div class="card-footer">
-          <span class="emp-count">1000–5000 employees</span>
-          <span class="badge-open">1 open role</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Company Card 3 -->
-    <div class="company-card">
-      <div class="card-banner">
-        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&q=80" alt="Cover" />
-      </div>
-      <div class="card-body">
-        <div class="logo-wrapper">
-          <div class="logo-box bg-blue">GS</div>
-        </div>
-        <h3 class="comp-name">Giza Systems</h3>
-        <p class="comp-cate">IT Solutions & Consulting</p>
-        <p class="comp-loc">📍 Cairo, Egypt</p>
-
-        <div class="tags-row">
-          <span class="tag">C#</span>
-          <span class="tag">.NET</span>
-          <span class="tag">Azure</span>
-          <span class="tag">SAP</span>
-          <span class="tag tag-more">+2</span>
-        </div>
-
-        <div class="card-footer">
-          <span class="emp-count">500–1000 employees</span>
-          <span class="badge-open">2 open roles</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Company Card 4 -->
-    <div class="company-card">
-      <div class="card-banner">
-        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=500&q=80" alt="Cover" />
-      </div>
-      <div class="card-body">
-        <div class="logo-wrapper">
-          <div class="logo-box bg-dark">V</div>
-        </div>
-        <h3 class="comp-name">Valeo Egypt</h3>
-        <p class="comp-cate">Automotive Tech / R&D</p>
-        <p class="comp-loc">📍 Cairo, Egypt</p>
-
-        <div class="tags-row">
-          <span class="tag">C++</span>
-          <span class="tag">Python</span>
-          <span class="tag">MATLAB</span>
-          <span class="tag">ROS</span>
-          <span class="tag tag-more">+2</span>
-        </div>
-
-        <div class="card-footer">
-          <span class="emp-count">1000+ employees</span>
-          <span class="badge-open">1 open role</span>
-        </div>
-      </div>
-    </div>
+    </article>
+    }
   </div>
+  }
 </section>

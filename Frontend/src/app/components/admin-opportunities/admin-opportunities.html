@@ -1,0 +1,108 @@
+<section class="admin-dashboard">
+  <div class="dashboard-heading">
+    <div class="dashboard-title"><span class="shield">♢</span><strong>Admin Dashboard</strong><span class="product-label">TechMap Egypt</span></div>
+    <div class="dashboard-stats"><strong>{{ companyCount }}</strong> companies <strong>{{ opportunities.length }}</strong> opportunities</div>
+  </div>
+
+  <div class="admin-tabs">
+    <button type="button" [class.selected]="activeTab === 'companies'" (click)="activeTab = 'companies'">Companies</button>
+    <button type="button" [class.selected]="activeTab === 'opportunities'" (click)="activeTab = 'opportunities'">Opportunities</button>
+    <button type="button" [class.selected]="activeTab === 'applications'" (click)="activeTab = 'applications'">Applications</button>
+  </div>
+
+  @if (activeTab === 'applications') {
+  <div class="admin-toolbar"><h2 class="tab-heading">Applications ({{ applications.length }})</h2></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>APPLICANT</th><th>OPPORTUNITY</th><th>PHONE</th><th>RESUME</th><th>STATUS</th></tr></thead>
+      <tbody>
+        @for (application of applications; track application.id) {
+        <tr>
+          <td><strong>{{ application.fullName }}</strong><small>{{ application.email }}</small></td>
+          <td>{{ application.opportunityTitle }}</td><td>{{ application.phone }}</td>
+          <td><a [href]="application.resumeLink" target="_blank" rel="noopener">Open CV</a></td>
+          <td><span class="pill type-pill">{{ application.status ?? 'Pending' }}</span></td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  } @else if (activeTab === 'companies') {
+  <div class="admin-toolbar">
+    <label class="admin-search"><span>⌕</span><input type="search" [(ngModel)]="companySearchTerm" placeholder="Search companies..." /></label>
+    <button type="button" class="add-button" (click)="openCreate('company')">＋ Add Company</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>COMPANY</th><th>INDUSTRY</th><th>LOCATION</th><th>ROLES</th><th>ACTIONS</th></tr></thead>
+      <tbody>
+        @for (company of filteredCompanies; track company.id) {
+        <tr>
+          <td><strong>{{ company.name }}</strong><small>{{ company.category }}</small></td>
+          <td>{{ company.category }}</td><td>{{ company.location }}</td><td><span class="pill mode-pill">{{ openRoles(company.name) }}</span></td>
+          <td class="actions-cell"><button class="icon-button edit-icon" type="button" (click)="openEditCompany(company)" aria-label="Edit company" title="Edit company"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button><button class="icon-button delete-icon" type="button" (click)="deleteCompany(company)" aria-label="Delete company" title="Delete company"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6v14H5V6"/><path d="M10 11v5M14 11v5"/></svg></button></td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  } @else if (isLoading) {
+  <p class="admin-state">Loading opportunities...</p>
+  } @else if (hasError) {
+  <p class="admin-state error">Unable to load opportunities right now.</p>
+  } @else {
+  <div class="admin-toolbar">
+    <label class="admin-search"><span>⌕</span><input type="search" [(ngModel)]="searchTerm" placeholder="Search opportunities..." /></label>
+    <button type="button" class="add-button" (click)="openCreate('opportunity')">＋ Add Opportunity</button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>ROLE</th><th>COMPANY</th><th>TYPE</th><th>MODEL</th><th>ACTIONS</th></tr>
+      </thead>
+      <tbody>
+        @for (opportunity of filteredOpportunities; track opportunity.id) {
+        <tr>
+          <td><strong>{{ opportunity.title }}</strong><small>{{ opportunity.location }} · {{ opportunity.postedLabel }}</small></td>
+          <td><span class="company-mark">
+            @if (opportunity.companyLogo.startsWith('http')) {
+            <img [src]="opportunity.companyLogo" [alt]="opportunity.companyName + ' logo'" />
+            } @else {
+            {{ opportunity.companyLogo }}
+            }
+          </span>{{ opportunity.companyName }}</td>
+          <td><span class="pill type-pill">{{ opportunity.type }}</span></td>
+          <td><span class="pill mode-pill">{{ opportunity.workMode }}</span></td>
+          <td class="actions-cell"><button class="icon-button edit-icon" type="button" (click)="openEditOpportunity(opportunity)" aria-label="Edit opportunity" title="Edit opportunity"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button><button class="icon-button delete-icon" type="button" (click)="deleteOpportunity(opportunity)" aria-label="Delete opportunity" title="Delete opportunity"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6v14H5V6"/><path d="M10 11v5M14 11v5"/></svg></button></td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
+
+  @if (formType) {
+  <div class="modal-backdrop" (click)="closeForm()">
+    <form class="admin-form" (ngSubmit)="saveForm()" (click)="$event.stopPropagation()">
+      <div class="form-heading"><h2>{{ editingId ? 'Edit' : 'Add' }} {{ formType === 'company' ? 'Company' : 'Opportunity' }}</h2><button type="button" class="close-button" (click)="closeForm()">×</button></div>
+      @if (formType === 'company') {
+      <label>Name<input name="name" [(ngModel)]="form['name']" required /></label>
+      <label>Location<input name="location" [(ngModel)]="form['location']" /></label>
+      <label>Description<textarea name="description" [(ngModel)]="form['description']"></textarea></label>
+      <label>Website<input name="website" [(ngModel)]="form['website']" /></label>
+      } @else {
+      <label>Company<select name="companyId" [(ngModel)]="form['companyId']" required>@for (company of companies; track company.id) {<option [value]="company.id">{{ company.name }}</option>}</select></label>
+      <label>Title<input name="title" [(ngModel)]="form['title']" required /></label>
+      <div class="form-row"><label>Type<select name="type" [(ngModel)]="form['type']"><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option></select></label><label>Work mode<select name="workMode" [(ngModel)]="form['workMode']"><option>On-site</option><option>Remote</option><option>Hybrid</option></select></label></div>
+      <label>Experience level<select name="experienceLevel" [(ngModel)]="form['experienceLevel']"><option>Entry-level</option><option>Mid-level</option><option>Senior</option><option>Junior</option><option>Lead</option></select></label>
+      <div class="form-row"><label>Location<input name="opportunityLocation" [(ngModel)]="form['location']" required /></label><label>Deadline<input name="deadline" type="date" [(ngModel)]="form['deadline']" /></label></div>
+      <div class="form-row"><label>Min salary<input name="minSalary" type="number" [(ngModel)]="form['minSalary']" /></label><label>Max salary<input name="maxSalary" type="number" [(ngModel)]="form['maxSalary']" /></label></div>
+      <label>Description<textarea name="opportunityDescription" [(ngModel)]="form['description']" required></textarea></label>
+      }
+      @if (saveError) {<p class="admin-state error">{{ saveError }}</p>}
+      <button class="add-button submit-form" type="submit" [disabled]="isSaving">{{ isSaving ? 'Saving...' : 'Save changes' }}</button>
+    </form>
+  </div>
+  }
+</section>

@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 
 import {
+  ActivatedRoute,
   Router,
   RouterLink
 } from '@angular/router';
@@ -15,6 +16,7 @@ import {
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { UserService } from '../../services/user-service';
+import { AuthService } from '../../services/auth-service';
 import { IuserResponse } from '../../models/iuser-response';
 
 
@@ -39,6 +41,8 @@ export class Login {
   private userService = inject(UserService);
   private formBuilder = inject(FormBuilder);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private authService = inject(AuthService);
 
   showPassword = false;
   isSubmitting = false;
@@ -108,7 +112,9 @@ export class Login {
             return;
           }
 
-          this.router.navigateByUrl('/');
+          this.authService.checkUserFromBackend();
+          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/home';
+          this.router.navigateByUrl(returnUrl);
         },
 
         error: (error: HttpErrorResponse) => {

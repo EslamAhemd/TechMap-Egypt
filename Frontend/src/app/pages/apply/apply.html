@@ -1,0 +1,66 @@
+<main class="apply-page">
+  <section class="apply-card">
+    @if (submitted) {
+    <div class="success-state">
+      <div class="success-icon">✓</div>
+      <h1>Application submitted</h1>
+      <p>Your application for <strong>{{ opportunityTitle }}</strong> was saved successfully.</p>
+      <button type="button" class="primary-action" (click)="goToOpportunities()">Back to Opportunities</button>
+    </div>
+    } @else {
+    <a routerLink="/opportunities" class="back-link">← Back to opportunities</a>
+    <p class="eyebrow">APPLICATION FORM</p>
+    <h1>Apply for {{ opportunityTitle }}</h1>
+    <p class="intro">Share your details and we will send your application to the hiring team.</p>
+
+    <form [formGroup]="applicationForm" (ngSubmit)="submitApplication()" novalidate>
+      @if (errorMessage) {<p class="form-error">{{ errorMessage }}</p>}
+      <div class="form-grid">
+        <label>
+          Full name
+          <input type="text" formControlName="fullName" placeholder="Your full name" />
+          @if (applicationForm.controls.fullName.touched && applicationForm.controls.fullName.invalid) {
+          <small>Enter your full name.</small>
+          }
+        </label>
+        <label>
+          Email address
+          <input type="email" formControlName="email" placeholder="you@example.com" />
+          @if (applicationForm.controls.email.touched && applicationForm.controls.email.invalid) {
+          <small>Enter a valid email.</small>
+          }
+        </label>
+        <label>
+          Phone number
+          <input type="tel" formControlName="phone" placeholder="01xxxxxxxxx" />
+          @if (applicationForm.controls.phone.touched && applicationForm.controls.phone.invalid) {
+          <small>Enter your phone number.</small>
+          }
+        </label>
+        <label>
+          Years of experience
+          <input type="number" min="0" formControlName="yearsOfExperience" />
+        </label>
+      </div>
+
+      <label>
+        Resume link
+        <input type="url" formControlName="resumeLink" placeholder="https://drive.google.com/..." />
+        @if (applicationForm.controls.resumeLink.touched && applicationForm.controls.resumeLink.invalid) {
+        <small>Enter a valid public resume link.</small>
+        }
+      </label>
+
+      <label>
+        Cover letter
+        <textarea rows="6" formControlName="coverLetter" placeholder="Tell us why you are a good fit..."></textarea>
+        @if (applicationForm.controls.coverLetter.touched && applicationForm.controls.coverLetter.invalid) {
+        <small>Write at least 30 characters.</small>
+        }
+      </label>
+
+      <button type="submit" class="primary-action">Submit Application</button>
+    </form>
+    }
+  </section>
+</main>

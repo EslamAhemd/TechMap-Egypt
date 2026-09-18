@@ -186,3 +186,6 @@
   border-radius: 20px;
   font-weight: 600;
 }
+
+.company-state { padding: 30px; text-align: center; color: #64748b; }
+.company-state.error { color: #dc2626; }

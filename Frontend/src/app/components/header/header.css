@@ -73,6 +73,16 @@
   background-color: #f8fafc;
 }
 
+.admin-nav-link {
+  padding: 9px 16px;
+  border-radius: 9px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
 .auth-buttons {
   display: flex;
   align-items: center;
@@ -89,6 +99,43 @@
 
 .login-btn:hover {
   color: #1e293b;
+}
+
+.admin-user-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid #dbe5f0;
+  border-radius: 9px;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-user-badge strong {
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 11px;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #fff;
+  font-size: 12px;
+}
+
+.logout-btn {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }
 
 .register-btn {

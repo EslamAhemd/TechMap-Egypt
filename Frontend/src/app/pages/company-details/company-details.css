@@ -1,0 +1,18 @@
+.company-details-page {
+  min-height: 100vh;
+  padding: 42px max(24px, calc((100vw - 1120px) / 2));
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.back-link { color: #2563eb; text-decoration: none; font-weight: 600; }
+.company-hero { margin-top: 28px; overflow: hidden; border: 1px solid #dbe5f0; border-radius: 16px; background: #fff; }
+.company-hero > img { display: block; width: 100%; height: 220px; object-fit: cover; }
+.hero-content { display: flex; align-items: center; gap: 18px; padding: 0 28px 24px; }
+.company-logo { display: grid; place-items: center; width: 72px; height: 72px; margin-top: -32px; border: 4px solid #fff; border-radius: 16px; background: #fff; color: #2563eb; font-size: 24px; font-weight: 800; box-shadow: 0 3px 10px #cbd5e1; }
+.company-logo img { width: 100%; height: 100%; border-radius: 12px; object-fit: contain; }
+.company-logo.dark { background: #5865f2; color: #fff; }.company-logo.blue { background: #0284c7; color: #fff; }
+h1, h2, h3, p { margin-top: 0; }.hero-content h1 { margin-bottom: 6px; font-size: 32px; }.hero-content p, .company-content p, .opportunity-row p { color: #64748b; }
+.company-content { display: flex; justify-content: space-between; gap: 24px; margin: 24px 0; padding: 26px 28px; border: 1px solid #dbe5f0; border-radius: 14px; background: #fff; }.company-content aside { display: grid; align-content: center; min-width: 170px; padding-left: 24px; border-left: 1px solid #e2e8f0; }.company-content aside span { margin-top: 6px; color: #64748b; font-size: 13px; }
+.opportunities-section h2 { margin-bottom: 14px; }.opportunity-list { overflow: hidden; border: 1px solid #dbe5f0; border-radius: 14px; background: #fff; }.opportunity-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 24px; border-bottom: 1px solid #eef2f7; }.opportunity-row:last-child { border-bottom: 0; }.opportunity-row h3 { margin-bottom: 6px; font-size: 17px; }.opportunity-row p { margin-bottom: 0; font-size: 13px; }.apply-link { display: inline-block; padding: 10px 16px; border: 0; border-radius: 8px; background: #1d4ed8; color: #fff; text-decoration: none; font: inherit; font-weight: 700; white-space: nowrap; cursor: pointer; }.missing-company { padding: 80px 0; text-align: center; }
+@media (max-width: 640px) { .hero-content { align-items: flex-start; flex-direction: column; }.hero-content h1 { font-size: 26px; }.company-content, .opportunity-row { align-items: flex-start; flex-direction: column; }.company-content aside { width: 100%; padding: 16px 0 0; border-top: 1px solid #e2e8f0; border-left: 0; }.apply-link { width: 100%; text-align: center; } }

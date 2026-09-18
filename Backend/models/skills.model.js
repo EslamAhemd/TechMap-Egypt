@@ -3,8 +3,12 @@ const mongoose = require("mongoose");
 const skillSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
-    unique: true,
+    required: false,
+    trim: true,
+    maxlength: 50,
+  },
+  skillName: {
+    type: String,
     trim: true,
     maxlength: 50,
   },

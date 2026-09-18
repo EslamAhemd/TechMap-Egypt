@@ -1,0 +1,124 @@
+.opportunities-page {
+  min-height: calc(100vh - 80px);
+  background: #f8fafc;
+  padding: 52px max(32px, calc((100vw - 1520px) / 2));
+  color: #0f172a;
+}
+
+.page-heading {
+  margin-bottom: 38px;
+}
+
+.page-heading h1 {
+  margin: 0 0 8px;
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.page-heading p {
+  margin: 0;
+  color: #52709a;
+  font-size: 17px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 58px;
+  padding: 0 20px;
+  background: #fff;
+  border: 1px solid #dbe5f0;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.08);
+}
+
+.search-icon {
+  color: #88a1c4;
+  font-size: 28px;
+  line-height: 1;
+  transform: rotate(-20deg);
+}
+
+.search-box input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: #1e3a5f;
+  font: inherit;
+  font-size: 17px;
+}
+
+.search-box input::placeholder {
+  color: #8aa1c3;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 24px 0 18px;
+}
+
+.filter-label {
+  margin-right: 6px;
+  color: #52709a;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.filters select {
+  min-width: 140px;
+  height: 46px;
+  padding: 0 38px 0 20px;
+  border: 1px solid #d9e3ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #17375e;
+  font-size: 15px;
+}
+
+.opportunities-page ::ng-deep .section-container {
+  padding: 22px 0 0;
+  background: transparent;
+}
+
+.opportunities-page ::ng-deep .cards-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .opportunities-page {
+    padding: 36px 24px;
+  }
+
+  .opportunities-page ::ng-deep .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .opportunities-page {
+    padding: 28px 16px;
+  }
+
+  .page-heading h1 {
+    font-size: 30px;
+  }
+
+  .filters select {
+    flex: 1 1 140px;
+  }
+
+  .opportunities-page ::ng-deep .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.role-checking {
+  padding: 80px 0;
+  color: #64748b;
+  text-align: center;
+}

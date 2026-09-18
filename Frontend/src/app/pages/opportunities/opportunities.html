@@ -1,0 +1,55 @@
+<app-header></app-header>
+
+<main class="opportunities-page">
+  @if (authService.isChecking()) {
+  <p class="role-checking">Checking account permissions...</p>
+  } @else if (authService.isAdmin()) {
+  <app-admin-opportunities></app-admin-opportunities>
+  } @else {
+  <div class="page-heading">
+    <h1>All Opportunities</h1>
+    <p>{{ filteredOpportunityCount }} opportunities found</p>
+  </div>
+
+  <div class="search-box">
+    <span class="search-icon" aria-hidden="true">⌕</span>
+    <input type="search" [(ngModel)]="searchTerm" placeholder="Search by job title, company, or skill..." aria-label="Search opportunities" />
+  </div>
+
+  <div class="filters" aria-label="Opportunity filters">
+    <span class="filter-label">Filter:</span>
+    <select [(ngModel)]="typeFilter" aria-label="Filter by type">
+      <option>All Types</option>
+      <option>Full-time</option>
+      <option>Internship</option>
+      <option>Part-time</option>
+    </select>
+    <select [(ngModel)]="levelFilter" aria-label="Filter by experience level">
+      <option>All Levels</option>
+      <option>Entry-level</option>
+      <option>Mid Level</option>
+      <option>Senior</option>
+    </select>
+    <select [(ngModel)]="workModeFilter" aria-label="Filter by work mode">
+      <option>All Work Models</option>
+      <option>On-site</option>
+      <option>Remote</option>
+      <option>Hybrid</option>
+    </select>
+    <select [(ngModel)]="locationFilter" aria-label="Filter by location">
+      <option>All Locations</option>
+      <option>Cairo, Egypt</option>
+      <option>Alexandria, Egypt</option>
+    </select>
+  </div>
+
+  <app-oopertunites
+    [fullPage]="true"
+    [searchTerm]="searchTerm"
+    [typeFilter]="typeFilter"
+    [levelFilter]="levelFilter"
+    [workModeFilter]="workModeFilter"
+    [locationFilter]="locationFilter">
+  </app-oopertunites>
+  }
+</main>

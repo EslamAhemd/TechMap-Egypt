@@ -13,11 +13,6 @@ import {
 @Injectable({
     providedIn: 'root'
 })
-
-
-@Injectable({
-    providedIn: 'root'
-})
 export class UserService {
     users: Iuser[] = [];
     private http = inject(HttpClient);
