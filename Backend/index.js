@@ -20,7 +20,8 @@ const { ooprouter } = require("./routes/opportunities.route.js");
 
 const { reviewRouter } = require("./routes/reviews.route.js");
 const { reportRouter } = require("./routes/reports.route.js");
-
+const { companyRouter } = require("./routes/companies.route.js");
+const { skillRouter } = require("./routes/skills.route.js");
 
 /////////////////////
 
@@ -30,12 +31,13 @@ app.use("/opportunities", ooprouter);
 app.use("/notifications", notificationRouter);
 app.use("/reviews", reviewRouter);
 app.use("/reports", reportRouter);
-
+app.use("/companies", companyRouter);
+app.use("/skills", skillRouter);
 const dns = require("dns");
 
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 //*--CONNECT DB--
-connectDB();
+ connectDB();
 
 app.listen(PORT, () => {
   //logic

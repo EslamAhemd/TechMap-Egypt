@@ -1,9 +1,26 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
+import { Login } from './components/login/login';
+import { Register } from './components/register/register';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Home
+    component: Home,
+    title: 'TechMap Egypt'
+  },
+  {
+    path: 'login',
+    component: Login,
+    title: 'Login | TechMap Egypt'
+  },
+  {
+    path: 'register',
+    component: Register,
+    title: 'Register | TechMap Egypt'
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
