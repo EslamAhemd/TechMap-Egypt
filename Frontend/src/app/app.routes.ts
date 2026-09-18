@@ -1,15 +1,17 @@
-import { Profile } from './components/profile/profile';
-import { authGuard } from './guards/auth-guard';
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
 import { Login } from './components/login/login';
 import { Register } from './components/register/register';
-import { NotFound } from './/not-found/not-found';
+import { OpportunitiesPage } from './pages/opportunities/opportunities';
+import { CompaniesPage } from './pages/companies/companies';
+import { CompanyDetails } from './pages/company-details/company-details';
+import { Apply } from './pages/apply/apply';
+import { NotFound } from './not-found/not-found';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Home,
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -26,6 +28,26 @@ export const routes: Routes = [
     path: 'register',
     component: Register,
     title: 'Register | TechMap Egypt'
+  },
+  {
+    path: 'opportunities',
+    component: OpportunitiesPage,
+    title: 'Opportunities | TechMap Egypt'
+  },
+  {
+    path: 'companies',
+    component: CompaniesPage,
+    title: 'Companies | TechMap Egypt'
+  },
+  {
+    path: 'companies/:id',
+    component: CompanyDetails,
+    title: 'Company Details | TechMap Egypt'
+  },
+  {
+    path: 'apply',
+    component: Apply,
+    title: 'Apply | TechMap Egypt'
   },
   {
     path: '**',
