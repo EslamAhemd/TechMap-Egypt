@@ -1,0 +1,316 @@
+:host {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  color: #0b1930;
+  background-color: #f8fafc;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.auth-information {
+  min-height: 100vh;
+  padding: 48px 42px 38px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background: linear-gradient(
+    160deg,
+    #07172d 0%,
+    #0c2345 55%,
+    #1d3d65 100%
+  );
+}
+
+.brand-link {
+  display: inline-flex;
+  width: fit-content;
+}
+
+.brand-logo {
+  width: 190px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.information-content {
+  max-width: 730px;
+  margin: auto 0;
+}
+
+.information-content h1 {
+  margin: 0 0 18px;
+  font-size: clamp(28px, 2.2vw, 42px);
+  line-height: 1.18;
+}
+
+.information-description {
+  margin: 0;
+  color: #c7d3e5;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.admin-access {
+  margin-top: 32px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid #224c88;
+  border-radius: 12px;
+  background-color: rgba(37, 82, 145, 0.22);
+}
+
+.admin-access strong {
+  color: #64b5ff;
+  font-size: 14px;
+}
+
+.admin-access span {
+  color: #d7e5f6;
+  font-size: 13px;
+}
+
+.statistics {
+  margin-top: 28px;
+  display: flex;
+  gap: 36px;
+}
+
+.statistics div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.statistics strong {
+  font-size: 25px;
+}
+
+.statistics span {
+  color: #8fa9cb;
+  font-size: 13px;
+}
+
+.benefits-list {
+  margin: 22px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #d1dcec;
+  list-style: none;
+}
+
+.benefits-list li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 15px;
+}
+
+.benefits-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #3890ff;
+  font-weight: bold;
+}
+
+.copyright {
+  margin: auto 0 0;
+  color: #6580a4;
+  font-size: 13px;
+}
+
+.auth-form-section {
+  min-height: 100vh;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-form-container {
+  width: 100%;
+  max-width: 430px;
+}
+
+.form-header {
+  margin-bottom: 32px;
+}
+
+.form-header h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.form-header p {
+  margin: 0;
+  color: #7183a0;
+  font-size: 14px;
+}
+
+.form-header a {
+  color: #1760e8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.form-header a:hover {
+  text-decoration: underline;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-field label {
+  color: #172b4a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  color: #13243e;
+  background-color: transparent;
+  border: 1px solid #d7e0ed;
+  border-radius: 11px;
+  outline: none;
+  font: inherit;
+}
+
+.form-field input:focus {
+  border-color: #2c66dc;
+  box-shadow: 0 0 0 3px rgba(44, 102, 220, 0.12);
+}
+
+.form-field input::placeholder {
+  color: #9aabc5;
+}
+
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  padding-right: 68px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  padding: 3px;
+  transform: translateY(-50%);
+  color: #7890b0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.forgot-password {
+  padding: 0;
+  color: #1760e8;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.field-error {
+  color: #c62d3f;
+  font-size: 12px;
+}
+
+.server-message {
+  padding: 11px 13px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.error-message {
+  color: #a61f31;
+  background-color: #fff1f3;
+  border: 1px solid #f1b7bf;
+}
+
+.success-message {
+  color: #176238;
+  background-color: #edfff4;
+  border: 1px solid #a7dfbd;
+}
+
+.submit-button {
+  min-height: 48px;
+  color: white;
+  background: linear-gradient(
+    90deg,
+    #244b7d,
+    #2862e5
+  );
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: bold;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.terms {
+  margin: -4px 0 0;
+  color: #91a1ba;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-information {
+    display: none;
+  }
+
+  .auth-form-section {
+    padding: 28px 20px;
+  }
+}

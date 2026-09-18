@@ -2,10 +2,14 @@ const express = require("express");
 const { myMiddleware } = require("./middlewares/looged.middleware.js");
 const { connectDB } = require("./config/db.config.js");
 const { PORT } = require("./config/env.config.js");
-
+const cors = require("cors");
 
 const app = express();
-
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+  })
+);
 
 app.use(express.json()); //middleware
 app.use(myMiddleware);

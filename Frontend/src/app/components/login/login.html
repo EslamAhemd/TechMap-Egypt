@@ -1,0 +1,184 @@
+<main class="auth-page">
+
+  <section class="auth-information">
+
+    <a routerLink="/" class="brand-link">
+
+      <img
+        src="logo.png"
+        alt="TechMap Egypt"
+        class="brand-logo"
+      >
+    </a>
+
+    <div class="information-content">
+      <h1>
+        Your next opportunity is one login away
+      </h1>
+
+      <p class="information-description">
+        Join thousands of developers and fresh graduates
+        who discovered their dream tech jobs in Egypt
+        through TechMap.
+      </p>
+
+      <div class="admin-access">
+        <strong>ADMIN ACCESS</strong>
+
+        <span>
+          Use the administrator account provided by your team.
+        </span>
+      </div>
+
+      <div class="statistics">
+        <div>
+          <strong>1,500+</strong>
+          <span>Opportunities</span>
+        </div>
+
+        <div>
+          <strong>200+</strong>
+          <span>Companies</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="copyright">
+      © 2026 TechMap Egypt. All rights reserved.
+    </p>
+  </section>
+
+
+
+  <section class="auth-form-section">
+    <div class="auth-form-container">
+      <header class="form-header">
+        <h2>Welcome back</h2>
+
+        <p>
+          Don't have an account?
+
+          <a routerLink="/register">
+            Register
+          </a>
+          
+        </p>
+      </header>
+
+      <form
+        class="auth-form"
+        [formGroup]="loginForm"
+        (ngSubmit)="onLogin()"
+        novalidate
+      >
+        <div class="form-field">
+          <label for="login-email">
+            Email address
+          </label>
+
+          <input
+            id="login-email"
+            type="email"
+            formControlName="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          >
+
+          @if (
+            loginForm.get('email')?.touched &&
+            loginForm.get('email')?.hasError('required')
+          ) {
+            <small class="field-error">
+              Email address is required.
+            </small>
+          }
+
+          @if (
+            loginForm.get('email')?.touched &&
+            loginForm.get('email')?.hasError('email')
+          ) {
+            <small class="field-error">
+              Enter a valid email address.
+            </small>
+          }
+        </div>
+
+        <div class="form-field">
+          <div class="label-row">
+            <label for="login-password">
+              Password
+            </label>
+
+            <button
+              type="button"
+              class="forgot-password"
+              (click)="
+                errorMessage =
+                'Password recovery has not been added yet.'
+              "
+            >
+              Forgot password?
+            </button>
+          </div>
+
+          <div class="password-container">
+            <input
+              id="login-password"
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+            >
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePassword()"
+            >
+              {{ showPassword ? 'Hide' : 'Show' }}
+            </button>
+          </div>
+
+          @if (
+            loginForm.get('password')?.touched &&
+            loginForm.get('password')?.hasError('required')
+          ) {
+            <small class="field-error">
+              Password is required.
+            </small>
+          }
+
+          @if (
+            loginForm.get('password')?.touched &&
+            loginForm.get('password')?.hasError('minlength')
+          ) {
+            <small class="field-error">
+              Password must contain at least 8 characters.
+            </small>
+          }
+        </div>
+
+        @if (errorMessage) {
+          <div
+            class="server-message error-message"
+            role="alert"
+          >
+            {{ errorMessage }}
+          </div>
+        }
+
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="isSubmitting"
+        >
+          {{
+            isSubmitting
+              ? 'Signing in...'
+              : 'Sign In'
+          }}
+        </button>
+      </form>
+    </div>
+  </section>
+</main>
