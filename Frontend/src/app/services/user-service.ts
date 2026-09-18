@@ -30,4 +30,15 @@ export class UserService {
     login(loginData: IloginData): Observable<IuserResponse> {
         return this.http.post<IuserResponse>(`${this.apiUrl}/login`, loginData);
     }
+
+
+    // to implement tho AuthGaurd
+    getToken(): string | null {
+        return localStorage.getItem('authToken');
+    }
+
+    isLoggedIn(): boolean {
+        const token = this.getToken();
+        return Boolean(token)
+    }
 }

@@ -46,7 +46,7 @@ export class Login {
 
   constructor() {
     this.loginForm = this.formBuilder.group({
-      
+
       email: [
         '',
         [

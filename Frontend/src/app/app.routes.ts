@@ -1,20 +1,5 @@
-// import { Routes } from '@angular/router';
-// import { Login } from './components/login/login';
-// import { Register } from './components/register/register';
-
-// export const routes: Routes = [
-//     // { path: '', redirectTo: 'home', pathMatch: 'full' },
-
-
-//         {path :'login', component: Login},
-//         {path :'register', component: Register}
-
-
-
-//     // { path: '**', component: NotFound },
-
-// ];
-
+import { Profile } from './components/profile/profile';
+import { authGuard } from './guards/auth-guard';
 import { Routes } from '@angular/router';
 
 import { Home } from './pages/home/home';
@@ -36,6 +21,12 @@ export const routes: Routes = [
     path: 'register',
     component: Register,
     title: 'Register | TechMap Egypt'
+  },
+  {
+    path: 'profile',
+    component: Profile,
+    canActivate: [authGuard],
+    title: 'Profile | TechMap Egypt'
   },
   {
     path: '**',

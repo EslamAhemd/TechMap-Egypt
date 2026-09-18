@@ -184,38 +184,62 @@ const register = async (req, res) => {
 const login = (req, res) => {
   const { email, password } = req.body;
 
+  console.log("1- Login controller started");
+  console.log("2- Email received:", email);
+
   if (!email || !password) {
     return res.status(401).json({ msg: " PLZ,ENTER EMAIL && PASSWORD" });
   }
-
+  /////////////
+  console.log("3- Searching for user in MongoDB");
+  /////////////
   userModel.findOne({ email })
     .then((user) => {
+      ////////
+      console.log("4- MongoDB search finished");
+      console.log("5- User exists:", Boolean(user));
+      ////////
       if (!user) {
         return res.status(401).json({ msg: "INVALID EMAIL OR PASSWORD" });
       }
 
+
+      console.log("6- Starting password comparison");
       // Compare the provided password with the hashed password in the database
       bcrypt.compare(password, user.password)
         .then((isMatch) => {
+          //////////
+
+          console.log("7- Password comparison finished");
+          console.log("8- Password matches:", isMatch);
+
+          //////////
           if (!isMatch) {
-            return res.json({ message: "invalid password", data: null });
+            console.log("9- Sending invalid password response");
+
+            return res.status(401).json({
+              message: "Invalid email or password",
+              data: null
+            });
           }
+
           const token = jwt.sign(
             { id: user._id, email: user.email, role: user.role },
             "Alaasecretkey267"
           );
+
           console.log("token:", token);
 
-          res.status(200).json({ msg: "U LOGGED SUCESSFULLY ", token: token });
+          return res.status(200).json({ msg: "U LOGGED SUCESSFULLY ", token: token });
         })
         .catch((err) => {
           console.log("error when comparing passwords", err);
-          res.json({ message: "error occurred while comparing passwords", err: err });
+          return res.json({ message: "error occurred while comparing passwords", err: err });
         });
     })
     .catch((err) => {
       console.log("error when finding user", err);
-      res.json({ message: "error occurred while finding user", err: err });
+      return res.json({ message: "error occurred while finding user", err: err });
     });
 };
 
