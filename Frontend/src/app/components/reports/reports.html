@@ -1,0 +1,55 @@
+<h2>Add Report</h2>
+
+<form (ngSubmit)="addReport()">
+  <select name="targetType" [(ngModel)]="reportData.targetType">
+    <option value="Company">Company</option>
+    <option value="Opportunity">Opportunity</option>
+    <option value="Review">Review</option>
+  </select>
+
+  <select name="reportType" [(ngModel)]="reportData.reportType" required>
+    <option value="" disabled>Select Report Type</option>
+    <option value="Incorrect Information">Incorrect Information</option>
+    <option value="Spam">Spam</option>
+    <option value="Inappropriate Content">Inappropriate Content</option>
+    <option value="Fake Opportunity">Fake Opportunity</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <textarea
+    name="description"
+    [(ngModel)]="reportData.description"
+    placeholder="Description"
+    required
+  ></textarea>
+
+  <button type="submit">Add Report</button>
+</form>
+
+<h2>Reports</h2>
+
+<div *ngFor="let report of reports">
+  <p><strong>Report Type:</strong> {{ report.reportType }}</p>
+
+  <p><strong>Target Type:</strong> {{ report.targetType }}</p>
+
+  <p><strong>Description:</strong> {{ report.description }}</p>
+
+  <p><strong>Status:</strong> {{ report.status }}</p>
+  <p><strong>Admin Notes:</strong> {{ report.adminNotes }}</p>
+  <select #status [value]="report.status">
+    <option value="Open">Open</option>
+    <option value="Resolved">Resolved</option>
+    <option value="Rejected">Rejected</option>
+  </select>
+
+  <input #adminNotes type="text" placeholder="Admin Notes" />
+
+  <button
+    (click)="updateReportStatus(report._id, status.value, adminNotes.value)"
+  >
+    Update Status
+  </button>
+  <button (click)="deleteReport(report._id)">Delete</button>
+  <hr />
+</div>

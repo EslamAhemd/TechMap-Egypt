@@ -6,7 +6,8 @@ const {
     getReportById,
     getReportsByTarget,
     updateReportStatus,
-    deleteReport
+    deleteReport,
+    getReportsCountByStatus
 } = require("../controller/reports.controller.js");
 
 const router = express.Router();
@@ -16,6 +17,8 @@ router.post("/", createReport);
 
 // Get all reports
 router.get("/", getAllReports);
+
+router.get("/stats/status", getReportsCountByStatus);
 
 
 // Get reports for a specific target

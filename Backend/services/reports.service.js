@@ -48,6 +48,16 @@ const deleteReport = async (reportId) => {
     return await reportModel.findByIdAndDelete(reportId);
 };
 
+const getReportsCountByStatus = async () => {
+    return await reportModel.aggregate([
+        {
+            $group: {
+                _id: "$status",
+                count: { $sum: 1 }
+            }
+        }
+    ]);
+};
 
 module.exports = {
     createReport,
@@ -55,5 +65,6 @@ module.exports = {
     getReportById,
     getReportsByTarget,
     updateReportStatus,
-    deleteReport
+    deleteReport,
+    getReportsCountByStatus
 };

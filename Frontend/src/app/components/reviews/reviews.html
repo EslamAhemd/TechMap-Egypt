@@ -1,0 +1,79 @@
+<h2>Add Review</h2>
+
+<form (ngSubmit)="addReview()">
+  <input
+    type="text"
+    name="userName"
+    [(ngModel)]="reviewData.userName"
+    placeholder="Your Name"
+  />
+
+  <input
+    type="number"
+    name="overall"
+    [(ngModel)]="reviewData.rating.overall"
+    min="1"
+    max="5"
+    placeholder="Overall Rating"
+    required
+  />
+
+  <input
+    type="number"
+    name="workEnvironment"
+    [(ngModel)]="reviewData.rating.workEnvironment"
+    min="1"
+    max="5"
+    placeholder="Work Environment"
+    required
+  />
+
+  <input
+    type="number"
+    name="techStack"
+    [(ngModel)]="reviewData.rating.techStack"
+    min="1"
+    max="5"
+    placeholder="Tech Stack"
+    required
+  />
+
+  <input
+    type="number"
+    name="careerGrowth"
+    [(ngModel)]="reviewData.rating.careerGrowth"
+    min="1"
+    max="5"
+    placeholder="Career Growth"
+    required
+  />
+
+  <textarea
+    name="reviewText"
+    [(ngModel)]="reviewData.reviewText"
+    placeholder="Write your review"
+    required
+  ></textarea>
+
+  <button type="submit">Add Review</button>
+</form>
+<h2>Company Reviews</h2>
+
+<div class="reviews-container">
+  <div class="review-card" *ngFor="let review of reviews">
+    <div class="review-header">
+      <div>
+        <h3>{{ review.userName }}</h3>
+        <span>Overall Rating: {{ review.rating.overall }}/5</span>
+      </div>
+    </div>
+
+    <p class="review-text">{{ review.reviewText }}</p>
+
+    <div class="ratings">
+      <span>Work Environment: {{ review.rating.workEnvironment }}/5</span>
+      <span>Tech Stack: {{ review.rating.techStack }}/5</span>
+      <span>Career Growth: {{ review.rating.careerGrowth }}/5</span>
+    </div>
+  </div>
+</div>

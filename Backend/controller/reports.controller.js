@@ -152,6 +152,21 @@ const deleteReport = async (req, res) => {
     }
 };
 
+const getReportsCountByStatus = async (req, res) => {
+    try {
+        const result = await reportsService.getReportsCountByStatus();
+
+        res.status(200).json({
+            success: true,
+            data: result
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
 
 module.exports = {
     createReport,
@@ -159,5 +174,6 @@ module.exports = {
     getReportById,
     getReportsByTarget,
     updateReportStatus,
-    deleteReport
+    deleteReport,
+    getReportsCountByStatus
 };
