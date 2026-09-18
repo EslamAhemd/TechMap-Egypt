@@ -5,6 +5,14 @@ import { Home } from './pages/home/home';
 import { Login } from './components/login/login';
 import { Register } from './components/register/register';
 
+import {
+  AdminUsers
+} from './components/admin-users/admin-users';
+
+import {
+  adminGuard
+} from './guards/admin-guard';
+
 export const routes: Routes = [
   {
     path: '',
@@ -27,6 +35,13 @@ export const routes: Routes = [
     canActivate: [authGuard],
     title: 'Profile | TechMap Egypt'
   },
+  {
+    path: 'admin/users',
+    component: AdminUsers,
+    canActivate: [adminGuard],
+    title: 'Users Admin | TechMap Egypt'
+  }
+  ,
   {
     path: '**',
     redirectTo: ''

@@ -30,7 +30,7 @@ const getUsers = (req, res) => {
 
 // POST
 const addUsers = (req, res) => {
-  console.log("body", req.body); 
+  console.log("body", req.body);
 
   userModel
     .create(req.body)
@@ -92,17 +92,17 @@ const deleteUsers = (req, res) => {
 
 
 async function hashAllPasswords() {
-    const users = await User.find({});
-    
-    for (let user of users) {
-        // التأكد إن كلمة السر مش معمول لها هاش بالفعل (مثلاً التشييك على طول الهاش)
-        if (!user.password.startsWith('$2b$') && !user.password.startsWith('$2a$')) {
-            const hashedPassword = await bcrypt.hash(user.password, 10);
-            user.password = hashedPassword;
-            await user.save();
-        }
+  const users = await User.find({});
+
+  for (let user of users) {
+    // التأكد إن كلمة السر مش معمول لها هاش بالفعل (مثلاً التشييك على طول الهاش)
+    if (!user.password.startsWith('$2b$') && !user.password.startsWith('$2a$')) {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      user.password = hashedPassword;
+      await user.save();
     }
-    console.log("Completed hashing all passwords.");
+  }
+  console.log("Completed hashing all passwords.");
 }
 const login = (req, res) => {
   const { email, password } = req.body;
@@ -165,6 +165,68 @@ const login = (req, res) => {
       return res.json({ message: "error occurred while finding user", err: err });
     });
 };
+const register = (req, res) => {
+  const { name, email, password } = req.body;
 
+  if (!name || !email || !password) {
+    return res.status(400).json({
+      message: "Name, email and password are required"
+    });
+  }
 
-module.exports = { getUsers, addUsers, updateUsers, deleteUsers, login };
+  if (password.length < 8) {
+    return res.status(400).json({
+      message:
+        "Password must contain at least 8 characters"
+    });
+  }
+
+  const normalizedEmail = email
+    .trim()
+    .toLowerCase();
+
+  userModel
+    .findOne({
+      email: normalizedEmail
+    })
+    .then((existingUser) => {
+      if (existingUser) {
+        return Promise.reject("EMAIL_EXISTS");
+      }
+
+      return userModel.create({
+        name: name.trim(),
+        email: normalizedEmail,
+        password: password,
+        role: "JobSeeker"
+      });
+    })
+    .then((newUser) => {
+      return res.status(201).json({
+        message: "User registered successfully",
+        data: {
+          id: newUser._id,
+          name: newUser.name,
+          email: newUser.email,
+          role: newUser.role
+        }
+      });
+    })
+    .catch((err) => {
+      if (err === "EMAIL_EXISTS") {
+        return res.status(409).json({
+          message:
+            "An account with this email already exists"
+        });
+      }
+
+      console.log("Error when registering user:", err);
+
+      return res.status(500).json({
+        message:
+          "An error occurred while creating the account"
+      });
+    });
+};
+
+module.exports = { getUsers, addUsers, updateUsers, deleteUsers, login, register };

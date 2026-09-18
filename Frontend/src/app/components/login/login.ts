@@ -103,6 +103,11 @@ export class Login {
             response.token
           );
 
+          if (this.userService.isAdmin()) {
+            this.router.navigateByUrl('/admin/users');
+            return;
+          }
+
           this.router.navigateByUrl('/');
         },
 
