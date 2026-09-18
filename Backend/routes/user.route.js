@@ -15,13 +15,11 @@ const { isAdmin } = require("../middlewares/isAuthorised.js");
 
 userRouter.post("/register", register);
 userRouter.post("/login", login);
+userRouter.get("/me", isAuthenticated, getCurrentUser);
 
 
 userRouter.get("/", getUsers);
 userRouter.post("/", isAuthenticated,isAdmin, addUsers);
 userRouter.delete("/:id",isAuthenticated,isAdmin,deleteUsers);
 userRouter.put("/:id", isAuthenticated,isAdmin, updateUsers);
-userRouter.post("/login", login);
-
-
 module.exports = { userRouter };
